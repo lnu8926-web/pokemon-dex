@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
+
+/* 포켓몬 도감 스타일 */
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+  }
+}
+
+/* 스캔 라인 애니메이션 */
+.scan-line {
+  animation: scan 3s linear infinite;
+}
+
+/* CRT 스크린 효과 */
+.crt-screen {
+  background: linear-gradient(
+      90deg,
+      transparent 50%,
+      rgba(0, 255, 65, 0.03) 50%
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+  background-size: 2px 100%, 100% 2px;
+}
+
+/* 글로우 텍스트 */
+.glow-text {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* 레트로 폰트 */
+.retro-font {
+  font-family: "Orbitron", "Monaco", "Menlo", "Ubuntu Mono", monospace;
+}
+
+/* 버튼 호버 효과 */
+.pokedex-button:hover {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* 카드 호버 3D 효과 */
+.pokemon-card {
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.pokemon-card:hover {
+  transform: perspective(1000px) rotateY(5deg) rotateX(5deg);
+}
