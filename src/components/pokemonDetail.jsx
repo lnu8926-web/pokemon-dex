@@ -38,7 +38,6 @@ import { getPokemon } from "../api/pokeAPI";
 
 // 포켓몬 타입별 색상 정의
 const typeColors = {
-  // 영어 타입
   normal: "gray",
   fire: "red",
   water: "blue",
@@ -57,25 +56,6 @@ const typeColors = {
   dark: "gray",
   steel: "gray",
   fairy: "pink",
-  // 한글 타입
-  노말: "gray",
-  불꽃: "red",
-  물: "blue",
-  전기: "yellow",
-  풀: "green",
-  얼음: "cyan",
-  격투: "red",
-  독: "purple",
-  땅: "orange",
-  비행: "blue",
-  에스퍼: "pink",
-  벌레: "green",
-  바위: "yellow",
-  고스트: "purple",
-  드래곤: "purple",
-  악: "gray",
-  강철: "gray",
-  페어리: "pink",
 };
 
 function PokemonCard({ id, onClick }) {
@@ -106,7 +86,7 @@ function PokemonCard({ id, onClick }) {
           <VStack spacing={4}>
             <Spinner size="xl" color="#00FF41" thickness="4px" speed="0.8s" />
             <Text color="#00FF41" fontFamily="monospace" fontSize="sm">
-              데이터 로딩 중...
+              Loading data...
             </Text>
           </VStack>
         </Center>
@@ -347,7 +327,7 @@ function PokemonCard({ id, onClick }) {
               fontFamily="monospace"
               textTransform="uppercase"
             >
-              &gt;&gt; 기술 데이터
+              &gt;&gt; Skill Data
             </Text>
             <Box
               maxH="80px"
@@ -429,7 +409,7 @@ function PokemonDetailModal({
           alignItems="center"
           justifyContent="center"
         >
-          포켓몬 상세 정보 - #{String(pokemon.id || 0).padStart(3, "0")}
+          Pokemon Details - #{String(pokemon.id || 0).padStart(3, "0")}
           <ModalCloseButton
             color="black"
             position="absolute"
@@ -802,7 +782,7 @@ export default function PCards() {
                     bg: "rgba(255,215,0,0.1)",
                   }}
                   onClick={handleClearSearch}
-                  aria-label="검색 초기화"
+                  aria-label="Clear search"
                 />
               </InputRightElement>
             )}

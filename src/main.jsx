@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { Container, Heading, Box } from "@chakra-ui/react";
+import { Heading, Box } from "@chakra-ui/react";
 import PCards from "./components/pokemonDetail.jsx";
 import "./styles/pokedex.css";
 
