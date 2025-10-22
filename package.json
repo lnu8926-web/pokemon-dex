@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "run dev"
+    "start": "vite dev"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",
