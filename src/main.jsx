@@ -26,10 +26,15 @@ const pokedexTheme = extendTheme({
   },
   styles: {
     global: {
+      html: {
+        height: "100%",
+      },
       body: {
-        bg: "linear-gradient(135deg, #DC143C 0%, #B22222 100%)",
-        color: "white",
+        bg: "white",
+        color: "black",
         fontFamily: "monospace",
+        height: "100vh",
+        overflow: "auto",
       },
     },
   },
@@ -38,19 +43,17 @@ const pokedexTheme = extendTheme({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ChakraProvider theme={pokedexTheme}>
-      <Box
-        minH="100vh"
-        bg="linear-gradient(135deg, #DC143C 0%, #B22222 100%)"
-        p={4}
-      >
+      <Box minH="100vh" bg="white" p={4}>
         {/* 도감 헤더 */}
         <Box
-          bg="linear-gradient(145deg, #C0C0C0 0%, #A9A9A9 100%)"
+          maxW="1200px"
+          mx="auto"
+          bg="linear-gradient(145deg, #DC143C 0%, #B22222 100%)"
           borderRadius="20px"
           p={6}
           mb={6}
-          boxShadow="inset 0 0 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.4)"
-          border="4px solid #8B0000"
+          boxShadow="0 10px 30px rgba(220,20,60,0.3)"
+          border="2px solid #8B0000"
         >
           <Box
             bg="black"
@@ -113,9 +116,18 @@ createRoot(document.getElementById("root")).render(
           </Box>
         </Box>
 
-        <Container maxW="container.xl">
+        {/* 포켓몬 카드 컨테이너 */}
+        <Box
+          maxW="1200px"
+          mx="auto"
+          bg="linear-gradient(145deg, #DC143C 0%, #B22222 100%)"
+          borderRadius="20px"
+          p={6}
+          boxShadow="0 10px 30px rgba(220,20,60,0.3)"
+          border="2px solid #8B0000"
+        >
           <PCards />
-        </Container>
+        </Box>
       </Box>
     </ChakraProvider>
   </StrictMode>

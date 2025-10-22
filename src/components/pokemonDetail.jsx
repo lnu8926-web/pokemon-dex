@@ -16,6 +16,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -31,6 +32,7 @@ import {
   SearchIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  CloseIcon,
 } from "@chakra-ui/icons";
 import { getPokemon } from "../api/pokeAPI";
 
@@ -209,7 +211,6 @@ function PokemonCard({ id, onClick }) {
       >
         #{String(id).padStart(3, "0")}
       </Box>
-
       <VStack spacing={4} align="stretch" mt={2}>
         {/* 포켓몬 이미지 - 특별 스크린 */}
         <Box
@@ -623,7 +624,8 @@ export default function PCards() {
   const [currentPage, setCurrentPage] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const pokemonsPerPage = 12;
+  const pokemonsPerPage = 9; // 한 페이지당 9마리 고정
+
   const totalPokemons = 151; // 1세대 포켓몬
 
   // 전체 포켓몬 ID 리스트 생성
@@ -752,13 +754,18 @@ export default function PCards() {
     setCurrentPage(1); // 검색 시 첫 페이지로
   };
 
+  const handleClearSearch = () => {
+    setSearchTerm("");
+    setCurrentPage(1); // 첫 페이지로 돌아가기
+  };
+
   return (
     <Box position="relative">
       {/* 검색 바 */}
       <Box mb={6} px={6}>
         <Box
           bg="linear-gradient(145deg, #2C2C2C, #1C1C1C)"
-          border="3px solid #00FF41"
+          border="2px solid #00FF41"
           borderRadius="15px"
           p={4}
           boxShadow="0 0 15px rgba(0,255,65,0.3)"
@@ -779,38 +786,66 @@ export default function PCards() {
               _placeholder={{ color: "#666" }}
               _focus={{
                 borderColor: "#FFD700",
-                boxShadow: "0 0 10px rgba(255,215,0,0.5)",
+                boxShadow: "0 0 0 3px rgba(255,215,0,0.2)",
+                outline: "none",
               }}
             />
+            {searchTerm && (
+              <InputRightElement>
+                <IconButton
+                  icon={<CloseIcon />}
+                  size="sm"
+                  variant="ghost"
+                  color="#00FF41"
+                  _hover={{
+                    color: "#FFD700",
+                    bg: "rgba(255,215,0,0.1)",
+                  }}
+                  onClick={handleClearSearch}
+                  aria-label="검색 초기화"
+                />
+              </InputRightElement>
+            )}
           </InputGroup>
 
           {/* 검색 결과 정보 */}
           <Box mt={3} textAlign="center">
-            <Text color="#00FF41" fontSize="sm" fontFamily="heading">
+            <Text
+              color="#00FF41"
+              fontSize="sm"
+              fontFamily="heading"
+              fontWeight="bold"
+            >
               총 {filteredIds.length}마리 포켓몬 발견 | 페이지 {currentPage}/
               {totalPages}
             </Text>
+
+            {/* 검색 중일 때 전체보기 버튼 표시 */}
+            {searchTerm && (
+              <Button
+                size="sm"
+                mt={2}
+                bg="rgba(255,215,0,0.1)"
+                border="1px solid #FFD700"
+                color="#FFD700"
+                fontFamily="heading"
+                _hover={{
+                  bg: "rgba(255,215,0,0.2)",
+                  transform: "scale(1.05)",
+                }}
+                onClick={handleClearSearch}
+              >
+                전체보기 (151마리)
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>
 
-      {/* 스캔 라인 효과 */}
-      <Box
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        bg="linear-gradient(90deg, transparent 98%, rgba(0,255,65,0.03) 100%)"
-        backgroundSize="3px 100%"
-        pointerEvents="none"
-        zIndex={1}
-      />
-
       {/* 포켓몬 카드 그리드 */}
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={6}
+        columns={{ base: 1, sm: 2, md: 3, lg: 3 }}
+        spacing={4}
         p={6}
         position="relative"
       >
@@ -830,21 +865,41 @@ export default function PCards() {
               border="2px solid #00FF41"
               color="#00FF41"
               fontFamily="heading"
+              fontWeight="bold"
               _hover={{
                 borderColor: "#FFD700",
                 transform: "scale(1.05)",
+                boxShadow: "0 0 10px rgba(255,215,0,0.3)",
               }}
               _disabled={{
-                opacity: 0.5,
+                opacity: 0.3,
                 cursor: "not-allowed",
+                _hover: {
+                  transform: "none",
+                  boxShadow: "none",
+                },
               }}
             >
               이전
             </Button>
 
-            <Text color="#00FF41" fontFamily="heading" fontSize="lg">
-              {currentPage} / {totalPages}
-            </Text>
+            <Box
+              bg="linear-gradient(145deg, #2C2C2C, #1C1C1C)"
+              px={4}
+              py={2}
+              borderRadius="md"
+              border="2px solid #00FF41"
+              boxShadow="0 0 10px rgba(0,255,65,0.2)"
+            >
+              <Text
+                color="#00FF41"
+                fontFamily="heading"
+                fontSize="lg"
+                fontWeight="bold"
+              >
+                {currentPage} / {totalPages}
+              </Text>
+            </Box>
 
             <Button
               onClick={() =>
@@ -855,13 +910,19 @@ export default function PCards() {
               border="2px solid #00FF41"
               color="#00FF41"
               fontFamily="heading"
+              fontWeight="bold"
               _hover={{
                 borderColor: "#FFD700",
                 transform: "scale(1.05)",
+                boxShadow: "0 0 10px rgba(255,215,0,0.3)",
               }}
               _disabled={{
-                opacity: 0.5,
+                opacity: 0.3,
                 cursor: "not-allowed",
+                _hover: {
+                  transform: "none",
+                  boxShadow: "none",
+                },
               }}
             >
               다음
